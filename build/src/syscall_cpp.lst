@@ -1,0 +1,295 @@
+GAS LISTING /tmp/ccn7slUE.s 			page 1
+
+
+   1              		.file	"syscall_cpp.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              		.align	2
+   7              		.globl	_Znwm
+   9              	_Znwm:
+  10              	.LFB0:
+  11              		.file 1 "src/syscall_cpp.cpp"
+   1:src/syscall_cpp.cpp **** //
+   2:src/syscall_cpp.cpp **** // Created by os on 6/22/22.
+   3:src/syscall_cpp.cpp **** //
+   4:src/syscall_cpp.cpp **** #include "../h/syscall_cpp.hpp"
+   5:src/syscall_cpp.cpp **** #include "../h/syscall_c.h"
+   6:src/syscall_cpp.cpp **** 
+   7:src/syscall_cpp.cpp **** void* operator new(size_t size) {
+  12              		.loc 1 7 33
+  13              		.cfi_startproc
+  14              	.LVL0:
+  15 0000 130101FF 		addi	sp,sp,-16
+  16              		.cfi_def_cfa_offset 16
+  17 0004 23341100 		sd	ra,8(sp)
+  18 0008 23308100 		sd	s0,0(sp)
+  19              		.cfi_offset 1, -8
+  20              		.cfi_offset 8, -16
+  21 000c 13040101 		addi	s0,sp,16
+  22              		.cfi_def_cfa 8, 0
+   8:src/syscall_cpp.cpp ****     return mem_alloc(size);
+  23              		.loc 1 8 5
+  24              		.loc 1 8 21 is_stmt 0
+  25 0010 97000000 		call	_Z9mem_allocm@plt
+  25      E7800000 
+  26              	.LVL1:
+   9:src/syscall_cpp.cpp **** }
+  27              		.loc 1 9 1
+  28 0018 83308100 		ld	ra,8(sp)
+  29              		.cfi_restore 1
+  30 001c 03340100 		ld	s0,0(sp)
+  31              		.cfi_restore 8
+  32              		.cfi_def_cfa 2, 16
+  33 0020 13010101 		addi	sp,sp,16
+  34              		.cfi_def_cfa_offset 0
+  35 0024 67800000 		jr	ra
+  36              		.cfi_endproc
+  37              	.LFE0:
+  39              		.align	2
+  40              		.globl	_Znam
+  42              	_Znam:
+  43              	.LFB1:
+  10:src/syscall_cpp.cpp **** void* operator new[](size_t size) {
+  44              		.loc 1 10 35 is_stmt 1
+  45              		.cfi_startproc
+  46              	.LVL2:
+  47 0028 130101FF 		addi	sp,sp,-16
+  48              		.cfi_def_cfa_offset 16
+  49 002c 23341100 		sd	ra,8(sp)
+GAS LISTING /tmp/ccn7slUE.s 			page 2
+
+
+  50 0030 23308100 		sd	s0,0(sp)
+  51              		.cfi_offset 1, -8
+  52              		.cfi_offset 8, -16
+  53 0034 13040101 		addi	s0,sp,16
+  54              		.cfi_def_cfa 8, 0
+  11:src/syscall_cpp.cpp ****     return mem_alloc(size);
+  55              		.loc 1 11 5
+  56              		.loc 1 11 21 is_stmt 0
+  57 0038 97000000 		call	_Z9mem_allocm@plt
+  57      E7800000 
+  58              	.LVL3:
+  12:src/syscall_cpp.cpp **** }
+  59              		.loc 1 12 1
+  60 0040 83308100 		ld	ra,8(sp)
+  61              		.cfi_restore 1
+  62 0044 03340100 		ld	s0,0(sp)
+  63              		.cfi_restore 8
+  64              		.cfi_def_cfa 2, 16
+  65 0048 13010101 		addi	sp,sp,16
+  66              		.cfi_def_cfa_offset 0
+  67 004c 67800000 		jr	ra
+  68              		.cfi_endproc
+  69              	.LFE1:
+  71              		.align	2
+  72              		.globl	_ZdlPv
+  74              	_ZdlPv:
+  75              	.LFB2:
+  13:src/syscall_cpp.cpp **** void operator delete(void* address) {
+  76              		.loc 1 13 37 is_stmt 1
+  77              		.cfi_startproc
+  78              	.LVL4:
+  79 0050 130101FF 		addi	sp,sp,-16
+  80              		.cfi_def_cfa_offset 16
+  81 0054 23341100 		sd	ra,8(sp)
+  82 0058 23308100 		sd	s0,0(sp)
+  83              		.cfi_offset 1, -8
+  84              		.cfi_offset 8, -16
+  85 005c 13040101 		addi	s0,sp,16
+  86              		.cfi_def_cfa 8, 0
+  14:src/syscall_cpp.cpp ****     mem_free(address);
+  87              		.loc 1 14 5
+  88              		.loc 1 14 13 is_stmt 0
+  89 0060 97000000 		call	_Z8mem_freePv@plt
+  89      E7800000 
+  90              	.LVL5:
+  15:src/syscall_cpp.cpp **** }
+  91              		.loc 1 15 1
+  92 0068 83308100 		ld	ra,8(sp)
+  93              		.cfi_restore 1
+  94 006c 03340100 		ld	s0,0(sp)
+  95              		.cfi_restore 8
+  96              		.cfi_def_cfa 2, 16
+  97 0070 13010101 		addi	sp,sp,16
+  98              		.cfi_def_cfa_offset 0
+  99 0074 67800000 		jr	ra
+ 100              		.cfi_endproc
+ 101              	.LFE2:
+GAS LISTING /tmp/ccn7slUE.s 			page 3
+
+
+ 103              		.align	2
+ 104              		.globl	_ZdaPv
+ 106              	_ZdaPv:
+ 107              	.LFB3:
+  16:src/syscall_cpp.cpp **** void operator delete[](void* address) {
+ 108              		.loc 1 16 39 is_stmt 1
+ 109              		.cfi_startproc
+ 110              	.LVL6:
+ 111 0078 130101FF 		addi	sp,sp,-16
+ 112              		.cfi_def_cfa_offset 16
+ 113 007c 23341100 		sd	ra,8(sp)
+ 114 0080 23308100 		sd	s0,0(sp)
+ 115              		.cfi_offset 1, -8
+ 116              		.cfi_offset 8, -16
+ 117 0084 13040101 		addi	s0,sp,16
+ 118              		.cfi_def_cfa 8, 0
+  17:src/syscall_cpp.cpp ****     mem_free(address);
+ 119              		.loc 1 17 5
+ 120              		.loc 1 17 13 is_stmt 0
+ 121 0088 97000000 		call	_Z8mem_freePv@plt
+ 121      E7800000 
+ 122              	.LVL7:
+  18:src/syscall_cpp.cpp **** }
+ 123              		.loc 1 18 1
+ 124 0090 83308100 		ld	ra,8(sp)
+ 125              		.cfi_restore 1
+ 126 0094 03340100 		ld	s0,0(sp)
+ 127              		.cfi_restore 8
+ 128              		.cfi_def_cfa 2, 16
+ 129 0098 13010101 		addi	sp,sp,16
+ 130              		.cfi_def_cfa_offset 0
+ 131 009c 67800000 		jr	ra
+ 132              		.cfi_endproc
+ 133              	.LFE3:
+ 135              	.Letext0:
+ 136              		.file 2 "src/../h/../lib/hw.h"
+ 137              		.file 3 "src/../h/syscall_c.h"
+GAS LISTING /tmp/ccn7slUE.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 syscall_cpp.cpp
+     /tmp/ccn7slUE.s:9      .text:0000000000000000 _Znwm
+     /tmp/ccn7slUE.s:13     .text:0000000000000000 .L0 
+     /tmp/ccn7slUE.s:15     .text:0000000000000000 .L0 
+     /tmp/ccn7slUE.s:16     .text:0000000000000004 .L0 
+     /tmp/ccn7slUE.s:19     .text:000000000000000c .L0 
+     /tmp/ccn7slUE.s:20     .text:000000000000000c .L0 
+     /tmp/ccn7slUE.s:22     .text:0000000000000010 .L0 
+     /tmp/ccn7slUE.s:24     .text:0000000000000010 .L0 
+     /tmp/ccn7slUE.s:25     .text:0000000000000010 .L0 
+     /tmp/ccn7slUE.s:28     .text:0000000000000018 .L0 
+     /tmp/ccn7slUE.s:29     .text:000000000000001c .L0 
+     /tmp/ccn7slUE.s:31     .text:0000000000000020 .L0 
+     /tmp/ccn7slUE.s:32     .text:0000000000000020 .L0 
+     /tmp/ccn7slUE.s:34     .text:0000000000000024 .L0 
+     /tmp/ccn7slUE.s:36     .text:0000000000000028 .L0 
+     /tmp/ccn7slUE.s:42     .text:0000000000000028 _Znam
+     /tmp/ccn7slUE.s:45     .text:0000000000000028 .L0 
+     /tmp/ccn7slUE.s:47     .text:0000000000000028 .L0 
+     /tmp/ccn7slUE.s:48     .text:000000000000002c .L0 
+     /tmp/ccn7slUE.s:51     .text:0000000000000034 .L0 
+     /tmp/ccn7slUE.s:52     .text:0000000000000034 .L0 
+     /tmp/ccn7slUE.s:54     .text:0000000000000038 .L0 
+     /tmp/ccn7slUE.s:56     .text:0000000000000038 .L0 
+     /tmp/ccn7slUE.s:57     .text:0000000000000038 .L0 
+     /tmp/ccn7slUE.s:60     .text:0000000000000040 .L0 
+     /tmp/ccn7slUE.s:61     .text:0000000000000044 .L0 
+     /tmp/ccn7slUE.s:63     .text:0000000000000048 .L0 
+     /tmp/ccn7slUE.s:64     .text:0000000000000048 .L0 
+     /tmp/ccn7slUE.s:66     .text:000000000000004c .L0 
+     /tmp/ccn7slUE.s:68     .text:0000000000000050 .L0 
+     /tmp/ccn7slUE.s:74     .text:0000000000000050 _ZdlPv
+     /tmp/ccn7slUE.s:77     .text:0000000000000050 .L0 
+     /tmp/ccn7slUE.s:79     .text:0000000000000050 .L0 
+     /tmp/ccn7slUE.s:80     .text:0000000000000054 .L0 
+     /tmp/ccn7slUE.s:83     .text:000000000000005c .L0 
+     /tmp/ccn7slUE.s:84     .text:000000000000005c .L0 
+     /tmp/ccn7slUE.s:86     .text:0000000000000060 .L0 
+     /tmp/ccn7slUE.s:88     .text:0000000000000060 .L0 
+     /tmp/ccn7slUE.s:89     .text:0000000000000060 .L0 
+     /tmp/ccn7slUE.s:92     .text:0000000000000068 .L0 
+     /tmp/ccn7slUE.s:93     .text:000000000000006c .L0 
+     /tmp/ccn7slUE.s:95     .text:0000000000000070 .L0 
+     /tmp/ccn7slUE.s:96     .text:0000000000000070 .L0 
+     /tmp/ccn7slUE.s:98     .text:0000000000000074 .L0 
+     /tmp/ccn7slUE.s:100    .text:0000000000000078 .L0 
+     /tmp/ccn7slUE.s:106    .text:0000000000000078 _ZdaPv
+     /tmp/ccn7slUE.s:109    .text:0000000000000078 .L0 
+     /tmp/ccn7slUE.s:111    .text:0000000000000078 .L0 
+     /tmp/ccn7slUE.s:112    .text:000000000000007c .L0 
+     /tmp/ccn7slUE.s:115    .text:0000000000000084 .L0 
+     /tmp/ccn7slUE.s:116    .text:0000000000000084 .L0 
+     /tmp/ccn7slUE.s:118    .text:0000000000000088 .L0 
+     /tmp/ccn7slUE.s:120    .text:0000000000000088 .L0 
+     /tmp/ccn7slUE.s:121    .text:0000000000000088 .L0 
+     /tmp/ccn7slUE.s:124    .text:0000000000000090 .L0 
+GAS LISTING /tmp/ccn7slUE.s 			page 5
+
+
+     /tmp/ccn7slUE.s:125    .text:0000000000000094 .L0 
+     /tmp/ccn7slUE.s:127    .text:0000000000000098 .L0 
+     /tmp/ccn7slUE.s:128    .text:0000000000000098 .L0 
+     /tmp/ccn7slUE.s:130    .text:000000000000009c .L0 
+     /tmp/ccn7slUE.s:132    .text:00000000000000a0 .L0 
+     /tmp/ccn7slUE.s:138    .text:00000000000000a0 .L0 
+     /tmp/ccn7slUE.s:398    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccn7slUE.s:755    .debug_str:0000000000000177 .LASF31
+     /tmp/ccn7slUE.s:729    .debug_str:00000000000000ab .LASF32
+     /tmp/ccn7slUE.s:723    .debug_str:0000000000000058 .LASF33
+     /tmp/ccn7slUE.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccn7slUE.s:135    .text:00000000000000a0 .Letext0
+     /tmp/ccn7slUE.s:707    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccn7slUE.s:713    .debug_str:0000000000000017 .LASF0
+     /tmp/ccn7slUE.s:753    .debug_str:0000000000000164 .LASF1
+     /tmp/ccn7slUE.s:737    .debug_str:00000000000000e2 .LASF2
+     /tmp/ccn7slUE.s:731    .debug_str:00000000000000bf .LASF4
+     /tmp/ccn7slUE.s:727    .debug_str:0000000000000099 .LASF3
+     /tmp/ccn7slUE.s:719    .debug_str:0000000000000041 .LASF5
+     /tmp/ccn7slUE.s:769    .debug_str:0000000000000276 .LASF6
+     /tmp/ccn7slUE.s:751    .debug_str:0000000000000151 .LASF7
+     /tmp/ccn7slUE.s:767    .debug_str:0000000000000266 .LASF8
+     /tmp/ccn7slUE.s:715    .debug_str:0000000000000024 .LASF9
+     /tmp/ccn7slUE.s:717    .debug_str:0000000000000032 .LASF10
+     /tmp/ccn7slUE.s:757    .debug_str:000000000000023b .LASF11
+     /tmp/ccn7slUE.s:721    .debug_str:0000000000000048 .LASF12
+     /tmp/ccn7slUE.s:771    .debug_str:0000000000000289 .LASF13
+     /tmp/ccn7slUE.s:735    .debug_str:00000000000000d6 .LASF14
+     /tmp/ccn7slUE.s:745    .debug_str:0000000000000127 .LASF15
+     /tmp/ccn7slUE.s:741    .debug_str:0000000000000103 .LASF16
+     /tmp/ccn7slUE.s:739    .debug_str:00000000000000f0 .LASF17
+     /tmp/ccn7slUE.s:759    .debug_str:000000000000024a .LASF19
+     /tmp/ccn7slUE.s:107    .text:0000000000000078 .LFB3
+     /tmp/ccn7slUE.s:133    .text:00000000000000a0 .LFE3
+     /tmp/ccn7slUE.s:725    .debug_str:0000000000000091 .LASF21
+     /tmp/ccn7slUE.s:638    .debug_loc:0000000000000000 .LLST3
+     /tmp/ccn7slUE.s:122    .text:0000000000000090 .LVL7
+     /tmp/ccn7slUE.s:733    .debug_str:00000000000000c6 .LASF18
+     /tmp/ccn7slUE.s:711    .debug_str:0000000000000010 .LASF20
+     /tmp/ccn7slUE.s:75     .text:0000000000000050 .LFB2
+     /tmp/ccn7slUE.s:101    .text:0000000000000078 .LFE2
+     /tmp/ccn7slUE.s:652    .debug_loc:0000000000000039 .LLST2
+     /tmp/ccn7slUE.s:90     .text:0000000000000068 .LVL5
+     /tmp/ccn7slUE.s:709    .debug_str:0000000000000000 .LASF23
+     /tmp/ccn7slUE.s:747    .debug_str:000000000000013d .LASF25
+     /tmp/ccn7slUE.s:43     .text:0000000000000028 .LFB1
+     /tmp/ccn7slUE.s:69     .text:0000000000000050 .LFE1
+     /tmp/ccn7slUE.s:761    .debug_str:0000000000000251 .LASF22
+     /tmp/ccn7slUE.s:666    .debug_loc:0000000000000072 .LLST1
+     /tmp/ccn7slUE.s:58     .text:0000000000000040 .LVL3
+     /tmp/ccn7slUE.s:773    .debug_str:0000000000000299 .LASF24
+     /tmp/ccn7slUE.s:763    .debug_str:0000000000000256 .LASF26
+     /tmp/ccn7slUE.s:10     .text:0000000000000000 .LFB0
+     /tmp/ccn7slUE.s:37     .text:0000000000000028 .LFE0
+     /tmp/ccn7slUE.s:680    .debug_loc:00000000000000ab .LLST0
+     /tmp/ccn7slUE.s:26     .text:0000000000000018 .LVL1
+     /tmp/ccn7slUE.s:743    .debug_str:0000000000000119 .LASF27
+GAS LISTING /tmp/ccn7slUE.s 			page 6
+
+
+     /tmp/ccn7slUE.s:775    .debug_str:00000000000002a6 .LASF29
+     /tmp/ccn7slUE.s:749    .debug_str:0000000000000143 .LASF28
+     /tmp/ccn7slUE.s:765    .debug_str:000000000000025c .LASF30
+     /tmp/ccn7slUE.s:110    .text:0000000000000078 .LVL6
+     /tmp/ccn7slUE.s:78     .text:0000000000000050 .LVL4
+     /tmp/ccn7slUE.s:46     .text:0000000000000028 .LVL2
+     /tmp/ccn7slUE.s:14     .text:0000000000000000 .LVL0
+     /tmp/ccn7slUE.s:139    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+_Z9mem_allocm
+_Z8mem_freePv
