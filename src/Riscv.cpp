@@ -1,9 +1,9 @@
 #include "../h/Riscv.hpp"
 #include "../h/MemoryAllocator.hpp"
-#include "../h/ccb.hpp"
+#include "../h/tcb.hpp"
 #include "../h/print.hpp"
 #include "../lib/console.h"
-#include "../h/ccb.hpp"
+#include "../h/tcb.hpp"
 
 #define ECALL_USER 0x0000000000000008UL
 #define ECALL_SUPERVISOR 0x0000000000000009UL

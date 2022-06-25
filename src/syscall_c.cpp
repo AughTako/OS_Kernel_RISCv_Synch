@@ -3,7 +3,7 @@
 //
 #include "../h/syscall_c.h"
 #include "../h/Scheduler.hpp"
-#include "../h/ccb.hpp"
+#include "../h/tcb.hpp"
 
 /* =========================================================================================================
  * This file contains the system calls to the riscv.cpp file that handles the codes of the specific C calls.

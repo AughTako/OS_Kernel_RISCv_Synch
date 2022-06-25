@@ -1,7 +1,7 @@
 //
 // Created by os on 6/24/22.
 //
-#include "../h/ccb.hpp"
+#include "../h/tcb.hpp"
 #include "../h/Riscv.hpp"
 
 CCB *CCB::running = nullptr;
