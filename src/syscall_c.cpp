@@ -28,11 +28,6 @@ void mem_free(void* address){
 }
 
 int thread_create(thread_t* handle, void (*start_routine)()){ //, void* args ){
-    /*void* stackSpace = nullptr;
-    if(start_routine != 0){
-        stackSpace = mem_alloc(sizeof(uint64) * DEFAULT_STACK_SIZE);
-        if(!stackSpace) return -1;
-    }*/
     //__asm__ volatile("mv a4, %0" : : "r" (stackSpace));
     //__asm__ volatile("mv a3, %0" : : "r" (args));
     __asm__ volatile("mv a2, %0" : : "r" (start_routine));
@@ -47,6 +42,12 @@ int thread_create(thread_t* handle, void (*start_routine)()){ //, void* args ){
 void thread_dispatch(){
     __asm__ volatile("li a0, 0x13");
     __asm__ volatile("ecall");
+}
+
+int thread_exit(){
+    __asm__ volatile ("li a0, 0x13");
+    __asm__ volatile("ecall");
+    return 0;
 }
 
 /*

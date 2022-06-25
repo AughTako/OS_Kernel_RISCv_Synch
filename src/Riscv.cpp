@@ -62,12 +62,12 @@ void Riscv::interruptHandler() {
         else if(intrId == THREAD_CREATE){
             CCB** handle;
             CCB::Body body;
-            //void* args;
+            void* args;
             //uint64 *stack;
             __asm__ volatile ("mv %0, a1" : "=r" (handle));
             __asm__ volatile ("mv %0, a2" : "=r" (body));
-            //__asm__ volatile ("ld a3, 0x68(%0)" : : "r" (backupSP));
-            //__asm__ volatile ("mv %0, a3" : "=r" (args));
+            __asm__ volatile ("ld a3, 0x68(%0)" : : "r" (backupSP));
+            __asm__ volatile ("mv %0, a3" : "=r" (args));
             //__asm__ volatile ("ld a4, 0x70(%0)" : : "r" (backupSP));
             //__asm__ volatile ("mv %0, a4" : "=r" (stack));
             *handle = CCB::createCoroutine(body);
@@ -80,6 +80,11 @@ void Riscv::interruptHandler() {
             CCB::dispatch();
             w_sstatus(sstatus);
             w_sepc(sepc);
+        }
+        else if(intrId == THREAD_EXIT){
+            CCB::running->setFinished(true);
+            CCB::yield();
+            w_sepc(r_sepc() + 4);
         }
 
     }

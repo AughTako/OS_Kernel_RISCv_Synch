@@ -16,11 +16,6 @@ void *MemoryAllocator::allocateB(size_t size) {
     uint64 numOfBlocks = (size+sizeof(BlockHeader))/MEM_BLOCK_SIZE + ((size+sizeof(BlockHeader)) % MEM_BLOCK_SIZE > 0 ? 1 : 0);
     return allocate(numOfBlocks);
 }
-/*
-void *MemoryAllocator::allocate_bytes(size_t size) { return __mem_alloc(size);}
-void* MemoryAllocator::allocate(size_t numOfBlocks) { return __mem_alloc(numOfBlocks * MEM_BLOCK_SIZE);}
-int MemoryAllocator::free(void* addr) { return __mem_free(addr);}
-*/
 
 void* MemoryAllocator::allocate(size_t numOfBlocks) {
     if (fmem_head == nullptr) return nullptr;
