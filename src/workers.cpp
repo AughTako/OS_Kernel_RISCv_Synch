@@ -13,8 +13,9 @@ static uint64 fibonacci(uint64 n)
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-void workerBodyA()
+void workerBodyA(void* args)
 {
+    thread_exit();
     uint8 i = 0;
     for (; i < 3; i++)
     {
@@ -24,7 +25,7 @@ void workerBodyA()
     }
 
     printString("A: yield\n");
-    __asm__ ("li t1, 7");
+    __asm__ ("li t1, 13");
     thread_dispatch();
 
     uint64 t1 = 0;
@@ -45,12 +46,12 @@ void workerBodyA()
         printInteger(i);
         printString("\n");
     }
-    printString("A:    F I N I S H E D");
+    printString("A:    F I N I S H E D\n");
     CCB::running->setFinished(true);
     thread_dispatch();
 }
 
-void workerBodyB()
+void workerBodyB(void* args)
 {
     uint8 i = 10;
     for (; i < 13; i++)
@@ -61,7 +62,7 @@ void workerBodyB()
     }
 
     printString("B: yield\n");
-    __asm__ ("li t1, 5");
+    __asm__ ("li t1, 9");
     thread_dispatch();
 
     uint64 result = fibonacci(23);

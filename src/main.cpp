@@ -20,15 +20,15 @@ void main(){
 
     CCB *coroutines[3];
 
-    thread_create(&coroutines[0], nullptr);
+    thread_create(&coroutines[0], nullptr, nullptr);
     CCB::running = coroutines[0];
     //coroutines[0] = CCB::createCoroutine(nullptr);
 
-    thread_create(&coroutines[1], &workerBodyA);
+    thread_create(&coroutines[1], &workerBodyA, nullptr);
     printString("CoroutineA created\n");
     //coroutines[1] = CCB::createCoroutine(&workerBodyA);
 
-    thread_create(&coroutines[2], &workerBodyB);
+    thread_create(&coroutines[2], &workerBodyB, nullptr);
     printString("CoroutineB created\n");
     //coroutines[2] = CCB::createCoroutine(&workerBodyB);
 

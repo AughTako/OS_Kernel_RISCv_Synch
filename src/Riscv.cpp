@@ -63,14 +63,11 @@ void Riscv::interruptHandler() {
             CCB** handle;
             CCB::Body body;
             void* args;
-            //uint64 *stack;
             __asm__ volatile ("mv %0, a1" : "=r" (handle));
             __asm__ volatile ("mv %0, a2" : "=r" (body));
             __asm__ volatile ("ld a3, 0x68(%0)" : : "r" (backupSP));
             __asm__ volatile ("mv %0, a3" : "=r" (args));
-            //__asm__ volatile ("ld a4, 0x70(%0)" : : "r" (backupSP));
-            //__asm__ volatile ("mv %0, a4" : "=r" (stack));
-            *handle = CCB::createCoroutine(body);
+            *handle = CCB::createCoroutine(body, args);
             w_sepc(r_sepc() + 4);
         }
         else if(intrId == THREAD_DISPATCH) {

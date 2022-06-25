@@ -6,9 +6,9 @@
 
 CCB *CCB::running = nullptr;
 
-CCB *CCB::createCoroutine(Body body)
+CCB *CCB::createCoroutine(Body body, void* args)
 {
-    return new CCB(body);
+    return new CCB(body, args);
 }
 
 void CCB::yield()
@@ -31,7 +31,7 @@ void CCB::dispatch()
 
 void CCB::threadWrapper() {
     Riscv::popSppSpie();
-    running->body();
+    running->body(running->args);
     running->setFinished(true);
     thread_dispatch();
 }

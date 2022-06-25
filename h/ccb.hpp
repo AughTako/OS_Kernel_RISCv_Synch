@@ -28,9 +28,9 @@ public:
 
     void setFinished(bool value) { finished = value;}
 
-    using Body = void (*)();
+    using Body = void (*)(void*);
 
-    static CCB *createCoroutine(Body body);
+    static CCB *createCoroutine(Body body, void* args);
 
     static void yield();
 
@@ -41,9 +41,10 @@ public:
     static void threadWrapper();
 
 private:
-    explicit CCB(Body body) :
+    explicit CCB(Body body, void* arg) :
             body(body),
             stack(body != nullptr ? (uint64*) MemoryAllocator::allocateB(sizeof(uint64) * STACK_SIZE) : nullptr),
+            args(arg),
             context({(uint64) &threadWrapper,
                      stack != nullptr ? (uint64) &stack[STACK_SIZE] : 0
                     }),
@@ -60,6 +61,7 @@ private:
 
     Body body;
     uint64 *stack;
+    void* args;
     Context context;
     bool finished;
 

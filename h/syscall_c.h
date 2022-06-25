@@ -16,13 +16,13 @@ typedef _thread* thread_t;
 
 int thread_create(
         thread_t* handle,
-        void(*start_routine)()
-        //void* arg
+        void(*start_routine)(void*),
+        void* args
         );
 int thread_create_NOT_STARTED(
         thread_t* handle,
-        void(*start_routine)(),
-        void* arg
+        void(*start_routine)(void*),
+        void* args
 );
 int thread_exit();
 void thread_dispatch();
