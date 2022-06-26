@@ -4,6 +4,7 @@
 #include "../h/print.hpp"
 #include "../lib/console.h"
 #include "../h/tcb.hpp"
+#include "../h/Semaphore.hpp"
 
 #define ECALL_USER 0x0000000000000008UL
 #define ECALL_SUPERVISOR 0x0000000000000009UL
@@ -88,14 +89,35 @@ void Riscv::interruptHandler() {
             CCB::yield();
             w_sepc(r_sepc() + 4);
         }
-        /*
-         * TODO
-         * ovo govno majku mu jebem ludu
-         * */
-        else if(intrId == SEM_OPEN) {}
-        else if(intrId == SEM_CLOSE) {}
-        else if(intrId == SEM_SIGNAL) {}
-        else if(intrId == SEM_WAIT) {}
+        else if(intrId == SEM_OPEN) {
+            Semaphore **handle;
+            unsigned init;
+            __asm__ volatile ("mv %0, a1" : "=r" (handle));
+            __asm__ volatile ("mv %0, a2" : "=r" (init));
+            *handle = Semaphore::createSemaphore(init);
+            w_sepc(r_sepc() + 4);
+        }
+        else if(intrId == SEM_CLOSE) {
+            Semaphore *handle;
+            __asm__ volatile ("mv %0, a1" : "=r" (handle));
+            delete handle;
+            w_sepc(r_sepc() + 4);
+        }
+        else if(intrId == SEM_SIGNAL) {
+            Semaphore *handle;
+            __asm__ volatile ("mv %0, a1" : "=r" (handle));
+            handle->signal();
+            w_sepc(r_sepc() + 4);
+        }
+        else if(intrId == SEM_WAIT) {
+            uint64 sepc = r_sepc() + 4;
+            uint64 sstatus = r_sstatus();
+            Semaphore *handle;
+            __asm__ volatile ("mv %0, a1" : "=r" (handle));
+            handle->wait();
+            w_sepc(sepc);
+            w_sstatus(sstatus);
+        }
 
     }
     else if (scause == 0x8000000000000009UL) {

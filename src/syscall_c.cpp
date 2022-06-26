@@ -55,3 +55,34 @@ int thread_create_NOT_STARTED(thread_t* handle, void (*start_routine)(void*), vo
     __asm__ volatile("ecall");
     return 0;
 }
+int sem_open (sem_t* handle, unsigned init) {
+    __asm__ volatile ("mv a2, %0" : : "r" (init));
+    __asm__ volatile ("mv a1, %0" : : "r" (handle));
+    __asm__ volatile ("li a0, 0x21");
+    __asm__ volatile ("ecall");
+    return 0;
+}
+
+int sem_close (sem_t handle) {
+    if (!handle) return -1;
+    __asm__ volatile ("mv a1, %0" : : "r" (handle));
+    __asm__ volatile ("li a0, 0x22");
+    __asm__ volatile ("ecall");
+    return 0;
+}
+
+int sem_wait (sem_t sem) {
+    if (!sem) return -1;
+    __asm__ volatile ("mv a1, %0" : : "r" (sem));
+    __asm__ volatile ("li a0, 0x23");
+    __asm__ volatile ("ecall");
+    return 0;
+}
+
+int sem_signal (sem_t sem) {
+    if (!sem) return -1;
+    __asm__ volatile ("mv a1, %0" : : "r" (sem));
+    __asm__ volatile ("li a0, 0x24");
+    __asm__ volatile ("ecall");
+    return 0;
+}

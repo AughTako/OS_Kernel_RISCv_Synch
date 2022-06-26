@@ -8,7 +8,7 @@
 #include "tcb.hpp"
 class Semaphore {
 public:
-    Semaphore(unsigned short init = 1): val(init) {}
+    Semaphore(unsigned init = 1): val(init) {}
     void* operator new(size_t size) {
         return MemoryAllocator::allocateB(size);
     }
@@ -21,13 +21,14 @@ public:
     int value() const { return val; }
     CCB *get();
     void put(CCB *ccb);
-
+    static sem_t createSemaphore(unsigned init);
 protected:
     void block();
     void unblock();
 
 private:
     int val;
+    sem_t handle;
     List<CCB> blockedQueue;
 };
 #endif //SYNCH_WORKING_SEMAPHORE_HPP

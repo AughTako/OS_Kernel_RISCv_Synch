@@ -30,3 +30,7 @@ void Semaphore::signal() {
 void Semaphore::wait() {
     if(--val <= 0) block();
 }
+
+sem_t Semaphore::createSemaphore(unsigned int init) {
+    return new Semaphore(init);
+}
