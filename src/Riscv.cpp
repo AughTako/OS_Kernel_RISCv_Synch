@@ -15,6 +15,11 @@
 #define THREAD_CREATE 0x11
 #define THREAD_EXIT 0x12
 #define THREAD_DISPATCH 0x13
+#define SEM_OPEN 0x21
+#define SEM_CLOSE 0x22
+#define SEM_WAIT 0x23
+#define SEM_SIGNAL 0x24
+
 extern uint64 backupSP;
 
 
@@ -83,6 +88,14 @@ void Riscv::interruptHandler() {
             CCB::yield();
             w_sepc(r_sepc() + 4);
         }
+        /*
+         * TODO
+         * ovo govno majku mu jebem ludu
+         * */
+        else if(intrId == SEM_OPEN) {}
+        else if(intrId == SEM_CLOSE) {}
+        else if(intrId == SEM_SIGNAL) {}
+        else if(intrId == SEM_WAIT) {}
 
     }
     else if (scause == 0x8000000000000009UL) {

@@ -15,30 +15,25 @@ class CCB
 {
 public:
     ~CCB() { delete[] stack; }
-
     void* operator new(size_t size) {
         return MemoryAllocator::allocateB(size);
     }
-
     void operator delete(void* address) {
         MemoryAllocator::free(address);
     }
 
     bool isFinished() const { return finished; }
-
+    bool isBlocked() const { return blocked; }
     void setFinished(bool value) { finished = value;}
+    void setBlocked(bool value) { blocked = value; }
 
     using Body = void (*)(void*);
-
     static CCB *createCoroutine(Body body, void* args);
-
     static void yield();
+    static void dispatch();
+    static void threadWrapper();
 
     static CCB *running;
-
-    static void dispatch();
-
-    static void threadWrapper();
 
 private:
     explicit CCB(Body body, void* arg) :
@@ -48,7 +43,8 @@ private:
             context({(uint64) &threadWrapper,
                      stack != nullptr ? (uint64) &stack[STACK_SIZE] : 0
                     }),
-            finished(false)
+            finished(false),
+            blocked(false)
     {
         if (body != nullptr) { Scheduler::put(this); }
     }
@@ -64,7 +60,7 @@ private:
     void* args;
     Context context;
     bool finished;
-
+    bool blocked;
     static void contextSwitch(Context *oldContext, Context *runningContext);
 
     static uint64 constexpr STACK_SIZE = 1024;

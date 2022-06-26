@@ -23,7 +23,7 @@ void CCB::yield()
 void CCB::dispatch()
 {
     CCB *old = running;
-    if (!old->isFinished()) { Scheduler::put(old); }
+    if (!old->isFinished() && !old->isBlocked()) { Scheduler::put(old); }
     running = Scheduler::get();
 
     CCB::contextSwitch(&old->context, &running->context);
