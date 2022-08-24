@@ -6,18 +6,18 @@
 #include "../h/MemoryAllocator.hpp"
 #include "../h/Riscv.hpp"
 #include "../h/tcb.hpp"
-#include "../h/print.hpp"
+#include "../h/printing.hpp"
 #include "../h/syscall_c.h"
 void userMain();
 uint64 backupSP;
 
 void main(){
 
-    Riscv::ms_sstatus(Riscv::SSTATUS_SPP);
+    //Riscv::ms_sstatus(Riscv::SSTATUS_SPP);
     Riscv::w_stvec((uint64) &Riscv::interruptRoutine);
-    MemoryAllocator::init();
     thread_create(&CCB::running, nullptr, nullptr);
     userMain();
+    printString("Vraceno\n");
 }
 
 

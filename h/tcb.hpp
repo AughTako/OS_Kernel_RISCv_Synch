@@ -26,7 +26,8 @@ public:
     bool isBlocked() const { return blocked; }
     void setFinished(bool value) { finished = value;}
     void setBlocked(bool value) { blocked = value; }
-
+    void setStarted(bool value) { started = value; }
+    bool getFinished() {return finished;}
     using Body = void (*)(void*);
     static CCB *createCoroutine(Body body, void* args);
     static void yield();
@@ -44,10 +45,9 @@ private:
                      stack != nullptr ? (uint64) &stack[STACK_SIZE] : 0
                     }),
             finished(false),
-            blocked(false)
-    {
-        if (body != nullptr) { Scheduler::put(this); }
-    }
+            blocked(false),
+            started(false)
+    {}
 
     struct Context
     {
@@ -61,6 +61,7 @@ private:
     Context context;
     bool finished;
     bool blocked;
+    bool started;
     static void contextSwitch(Context *oldContext, Context *runningContext);
 
     static uint64 constexpr STACK_SIZE = 1024;

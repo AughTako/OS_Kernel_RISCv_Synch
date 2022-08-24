@@ -12,7 +12,7 @@ void* operator new[](size_t);
 void operator delete(void*);
 void operator delete[](void*);
 
-/*
+
 class Thread{
 public:
     Thread(void (*body)(void*), void* arg);
@@ -22,9 +22,20 @@ public:
     static int sleep(time_t time);
     static void wrapper(void* args);
 private:
-    thread_t handle;
+    thread_t myHandle;
 protected:
     Thread();
     virtual void run() {}
-};*/
+};
+
+class Semaphore {
+public:
+    Semaphore (unsigned init = 1);
+    virtual ~Semaphore ();
+    int wait ();
+    int signal ();
+private:
+    sem_t myHandle;
+};
+
 #endif //OS_PROJECT_SYSCALL_CPP_HPP

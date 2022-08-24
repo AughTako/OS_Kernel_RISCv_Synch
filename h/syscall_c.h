@@ -13,14 +13,16 @@ class CCB;
 
 typedef CCB _thread;
 typedef _thread* thread_t;
-class Semaphore;
-typedef Semaphore* sem_t;
+
+class Semaphore_sys;
+typedef Semaphore_sys* sem_t;
 
 int thread_create(
         thread_t* handle,
         void(*start_routine)(void*),
         void* args
         );
+
 int thread_create_NOT_STARTED(
         thread_t* handle,
         void(*start_routine)(void*),
@@ -36,4 +38,10 @@ int sem_open (
 int sem_close (sem_t handle);
 int sem_wait (sem_t id);
 int sem_signal (sem_t id);
+
+const int EOF = -1;
+char getc();
+void putc(char);
+
+
 #endif //OS_PROJECT_SYSCALL_C_H

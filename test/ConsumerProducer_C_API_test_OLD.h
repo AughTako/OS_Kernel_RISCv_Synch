@@ -6,6 +6,10 @@
 #define XV6_CONSUMERPRODUCER_C_API_TEST_H
 
 #include "../h/syscall_c.h"
+#include "../lib/console.h"
+#include "../lib/hw.h"
+#include "../h/printing.hpp"
+
 #include "../h/buffer.hpp"
 
 sem_t waitForAll;
@@ -23,7 +27,7 @@ void producerKeyboard(void *arg) {
 
     int key;
     int i = 0;
-    while ((key = getc()) != 0x1b) {
+    while ((key = __getc()) != 0x1b) {
         data->buffer->put(key);
         i++;
 
@@ -62,20 +66,20 @@ void consumer(void *arg) {
         int key = data->buffer->get();
         i++;
 
-        putc(key);
+        __putc(key);
 
         if (i % (5 * data->id) == 0) {
             thread_dispatch();
         }
 
         if (i % 80 == 0) {
-            putc('\n');
+            __putc('\n');
         }
     }
 
     while (data->buffer->getCnt() > 0) {
         int key = data->buffer->get();
-        putc(key);
+        __putc(key);
     }
 
     sem_signal(data->wait);

@@ -25,7 +25,6 @@ void CCB::dispatch()
     CCB *old = running;
     if (!old->isFinished() && !old->isBlocked()) { Scheduler::put(old); }
     running = Scheduler::get();
-
     CCB::contextSwitch(&old->context, &running->context);
 }
 

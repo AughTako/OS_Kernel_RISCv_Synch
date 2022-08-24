@@ -6,16 +6,22 @@
 #define SYNCH_WORKING_SEMAPHORE_HPP
 #include "List.hpp"
 #include "tcb.hpp"
-class Semaphore {
+class Semaphore_sys {
 public:
-    Semaphore(unsigned init = 1): val(init) {}
+    Semaphore_sys(unsigned init = 1): val(init) {}
     void* operator new(size_t size) {
         return MemoryAllocator::allocateB(size);
     }
     void operator delete(void* address) {
         MemoryAllocator::free(address);
     }
+    void* operator new[](size_t size) {
+        return MemoryAllocator::allocateB(size);
+    }
 
+    void operator delete[](void* address) {
+        MemoryAllocator::free(address);
+    }
     void wait();
     void signal();
     int value() const { return val; }
@@ -28,7 +34,7 @@ protected:
 
 private:
     int val;
-    sem_t handle;
+    //sem_t handle;
     List<CCB> blockedQueue;
 };
 #endif //SYNCH_WORKING_SEMAPHORE_HPP

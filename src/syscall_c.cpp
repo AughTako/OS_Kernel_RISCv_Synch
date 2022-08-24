@@ -4,6 +4,7 @@
 #include "../h/syscall_c.h"
 #include "../h/Scheduler.hpp"
 #include "../h/tcb.hpp"
+#include "../lib/console.h"
 
 /* =========================================================================================================
  * This file contains the system calls to the riscv.cpp file that handles the codes of the specific C calls.
@@ -51,7 +52,7 @@ int thread_create_NOT_STARTED(thread_t* handle, void (*start_routine)(void*), vo
     __asm__ volatile("mv a3, %0" : : "r" (args));
     __asm__ volatile("mv a2, %0" : : "r" (start_routine));
     __asm__ volatile("mv a1, %0" : : "r" (handle));
-    __asm__ volatile("li a0, 0x11");
+    __asm__ volatile("li a0, 0x14");
     __asm__ volatile("ecall");
     return 0;
 }
@@ -85,4 +86,11 @@ int sem_signal (sem_t sem) {
     __asm__ volatile ("li a0, 0x24");
     __asm__ volatile ("ecall");
     return 0;
+}
+
+char getc() {
+    return __getc();
+}
+void putc(char c) {
+    __putc(c);
 }

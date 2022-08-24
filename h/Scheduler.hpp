@@ -20,6 +20,13 @@ private:
     void operator delete(void* address) {
         MemoryAllocator::free(address);
     }
+    void* operator new[](size_t size) {
+        return MemoryAllocator::allocateB(size);
+    }
+
+    void operator delete[](void* address) {
+        MemoryAllocator::free(address);
+    }
 public:
     static CCB *get();
 

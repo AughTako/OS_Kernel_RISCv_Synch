@@ -14,16 +14,14 @@ struct BlockHeader {
 
 class MemoryAllocator {
     static BlockHeader *fmem_head;
-
+    static bool flag;
     MemoryAllocator() = delete;
 
 public:
-    static void init();
-
     static void *allocate(size_t);
     static void *allocateB(size_t);
     static int free(void *);
-    static void joinUpper(BlockHeader *);
+    static void tryToJoin(BlockHeader *);
 };
 
 #endif //MEMORYALLOCATOR_H
